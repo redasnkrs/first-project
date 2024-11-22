@@ -112,10 +112,73 @@ Nous pourrons ensuite envoyer notre travail sur `origin main` avec :
 Pour récupérer simplement un repository, on peut utiliser le clonage (première fois !), dont on est propriétaire (ou un `fork`):
 
 ```bash
-git clone CLEF_SSH (ou https)
+		git clone CLEF_SSH (ou https)
     cd nom_du_repertoire
 		# pour voir le remote créé
 		git remote -v
 ```
 
 Et nous pouvons travailler en local sur le projet.
+
+### Récupération de commit
+
+Pour récupérer les nouveaux ou commit non présent en local (par exemple travail sur plusieures machines):
+
+```bash # recupére le dossier ".git" (vérification de modification)
+    git fetch
+
+    # recupére si il y'a des changemets, récuperation deu dossier ".git"
+    # Et des fichiers physiques.
+    git pull
+```
+
+### Retour sur un commit
+
+#### On peut revenir sur un ancien commit, sans perdre les fichiers
+
+On peut revenir sur un ancien commit, sans perdre les fichers
+
+```bash
+#on avait envoyé 4 commits en ligne
+git push
+#retourne sur un ancien commit
+# ! disparition des commit qui suivent
+git restore 0901dfac84
+
+# on back 3 commits, sans modifer les fichiers physiques
+# en crant un nouveau commit
+git add .
+git commit -m"-3 commit + save files"
+```
+
+Si on effectue un git push on aura une erreur car il y'a une incompatibilité de la chaîne de commit,
+uen bifurcation.
+
+**seule possiblité**: forcé le push:
+
+    git push --force origin main
+
+#### On peut revenir sur un ancien commit, sans perdre les changements actuel d'un fichiers à l'état de ce commit
+
+On peut revenir sur un ancien commit, sans perdre les fichers
+
+```bash
+#création d'un fichier
+echo "blala" > f.txt
+git add .
+git commit -m"f.txt"
+git push
+#création deuxieme fichier
+echo "blala" > f.txt
+git add .
+git commit -m"f.txt"
+git push
+#retourne sur un ancien commit
+# ! disparition des commit qui suivent
+git restore 0901dfac84
+
+# on back 3 commits, sans modifer les fichiers physiques
+# en crant un nouveau commit
+git add .
+git commit -m"-3 commit + save files"
+```
