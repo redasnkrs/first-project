@@ -106,3 +106,16 @@ git push -u origin main
 Nous pourrons ensuite envoyer notre travail sur `origin main` avec :
 
     git push
+
+## Récupération du repository
+
+Pour récupérer simplement un repository, on peut utiliser le clonage (première fois !), dont on est propriétaire (ou un `fork`):
+
+```bash
+git clone CLEF_SSH (ou https)
+    cd nom_du_repertoire
+		# pour voir le remote créé
+		git remote -v
+```
+
+Et nous pouvons travailler en local sur le projet.
